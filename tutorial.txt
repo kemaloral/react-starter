@@ -1,0 +1,39 @@
+nodejs yukle
+vscode yukle
+vscode admin mode calistir
+proje klasouru acılır
+view menusunden integrated terminal acılır
+npm init ile proje dosyası olusturulur
+paketler yüklenmeli
+   npm install --save react
+   npm install --save react-dom
+   npm install --save-dev typescript
+   npm install --save-dev @types/react
+   npm install --save-dev @types/react-dom
+   npm install --save-dev webpack // transpiler
+   npm install --save-dev webpack-cli   //transpiler client
+   npm install --save-dev webpack-dev-server  //developer iss
+   npm install --save-dev webpack-hot-middleware  //developer immediate transpiler
+   npm install --save-dev awesome-typescript-loader  //developer immediate transpiler
+
+   
+src klasouru olusturulur
+Extensions gel sunları yüklenmeli
+   Eslint
+   Tslint
+   vscode-icons
+   beautify
+Src ye gec app.tsx olustur importları yaz
+   import * as React from "react";   react kütüphasnesinin uygulamaya yükler
+   import * as ReactDom from "react-dom"; reactin html elemanlarının yönetildiği kütüphaneyi yükler
+   ReactDom.render komutu ile olusturdugumuz react uygulamamızın html nesnesinin icine yuklenmesi saglanır
+   bu amacla bir index.html yaratılıp orada aynı idye sahip olan bir dv olusturulur. 
+
+
+
+
+
+
+
+   
+
