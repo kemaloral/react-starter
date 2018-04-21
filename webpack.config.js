@@ -3,7 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
- 
+
 const cssExtractPlugin = new ExtractTextPlugin({
     filename: 'style.css',
     allChunks: true
@@ -25,7 +25,7 @@ module.exports = {
         watchContentBase: true,
         publicPath: "/"
     },
-    mode: "production",
+    mode: "development",
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },
@@ -40,9 +40,8 @@ module.exports = {
                 use: cssExtractPlugin.extract({
                     fallback: 'style-loader',
                     use: [{
-                            loader: 'css-loader'
-                        }
-                    ]
+                        loader: 'css-loader'
+                    }]
                 })
             },
             {
@@ -116,7 +115,7 @@ module.exports = {
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': '"production"'
+            'process.env.NODE_ENV': '"development"'
         })
     ]
 };
