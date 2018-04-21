@@ -25,7 +25,7 @@ module.exports = {
         watchContentBase: true,
         publicPath: "/"
     },
-    mode: "development",
+    mode: "production",
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },
@@ -44,6 +44,30 @@ module.exports = {
                         }
                     ]
                 })
+            },
+            {
+                test: /\.(png|jpg|jpeg|gif|bmp)$/,
+                use: 'file-loader?limit=100000&name=img/[name].[ext]'
+            },
+            {
+                test: /\.woff?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                use: "file-loader?limit=100000&name=fonts/[name].[ext]&mimetype=application/font-woff"
+            },
+            {
+                test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                use: "file-loader?limit=100000&name=fonts/[name].[ext]&mimetype=application/font-woff"
+            },
+            {
+                test: /\.eot?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                use: "file-loader?limit=100000&name=fonts/[name].[ext]&mimetype=application/vnd.ms-fontobject"
+            },
+            {
+                test: /\.[ot]tf?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                use: "file-loader?limit=100000&name=fonts/[name].[ext]&mimetype=application/octet-stream"
+            },
+            {
+                test: /\.svg?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                use: "file-loader?limit=100000&name=fonts/[name].[ext]&mimetype=image/svg+xml"
             }
         ]
     },
@@ -82,7 +106,7 @@ module.exports = {
     },
     plugins: [
         cssExtractPlugin,
-        new webpack.HotModuleReplacementPlugin(),
+        //new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
             filename: path.resolve(".", 'dist/index.html'),
             template: path.resolve(".", 'index.html'),
@@ -92,7 +116,7 @@ module.exports = {
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': '"development"'
+            'process.env.NODE_ENV': '"production"'
         })
     ]
 };
