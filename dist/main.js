@@ -101,26 +101,41 @@ class dbRouter {
         this.init();
     }
     find(req, res, next) {
-        let query = `select * from User`;
+        let query = `select U.Name  ,UserInfo.Telephone 
+        from [User] U
+        left join [dbo].[UserInfo] UserInfo on UserInfo.UserId=U.Id`;
         new sql.ConnectionPool(config).connect().then(pool => {
             var request = pool.request();
             request.query(query).then(result => {
-                console.log(result);
+                res.status(201).send(result.recordset);
+            });
+        });
+    }
+    findUser(req, res, next) {
+        let query = `select U.Name  
+        from [User] U`;
+        new sql.ConnectionPool(config).connect().then(pool => {
+            var request = pool.request();
+            request.query(query).then(result => {
+                res.status(201).send(result.recordset);
+            });
+        });
+    }
+    userById(req, res, next) {
+        let id = req.params.id;
+        let query = `select Name  
+        from [User] where Id=@Id`;
+        new sql.ConnectionPool(config).connect().then(pool => {
+            var request = pool.request();
+            request.input("Id", id).query(query).then(result => {
+                res.status(201).send(result.recordset);
             });
         });
     }
     init() {
         this.router.get('/', this.find.bind(this));
-        let query = `select U.Name  ,UserInfo.Telephone 
-        from [User] U
-        left join [dbo].[UserInfo] UserInfo on UserInfo.UserId=U.Id
-        FOR JSON AUTO `;
-        new sql.ConnectionPool(config).connect().then(pool => {
-            var request = pool.request();
-            request.query(query).then(result => {
-                console.log(result);
-            });
-        });
+        this.router.get('/user', this.findUser.bind(this));
+        this.router.get('/user/:id', this.userById.bind(this));
     }
 }
 exports.dbRouter = dbRouter;
